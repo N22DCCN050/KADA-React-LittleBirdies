@@ -1,0 +1,61 @@
+erDiagram
+    USER ||--o{ TASK : manages
+    USER ||--o{ SETTINGS : configures
+    TASK }|--|| CATEGORY : belongs_to
+    TASK }|--|| PRIORITY : assigned_to
+    TASK }|--|| STATUS : tracks
+    TASK ||--o{ ANALYTICS_METRICS : aggregates_into
+
+    USER {
+        string email PK
+        string token
+        string name
+        string role "student | manager | developer"
+    }
+
+    TASK {
+        string id PK
+        string title
+        string subtitle
+        string notes
+        string category FK "work | study | birdcare | personal | health | finance"
+        string priority FK "low | medium | high | urgent"
+        string status FK "todo | inprogress | done"
+        string dueDate
+        boolean favorite
+        string createdAt
+        string updatedAt
+    }
+
+    CATEGORY {
+        string key PK
+        string label
+        string icon
+        string emoji
+        string color
+        string bg
+    }
+
+    PRIORITY {
+        string key PK
+        string label
+        int level
+        string color
+        string bg
+    }
+
+    STATUS {
+        string key PK
+        string label
+        string color
+        string bg
+    }
+
+    ANALYTICS_METRICS {
+        int total
+        int completed
+        int inProgress
+        int todo
+        int favorites
+        int completionRate
+    }

@@ -1,0 +1,34 @@
+graph LR
+    UserAction["Người dùng tương tác (Thêm / Sửa / Xóa / Filter / Toggle)"]
+    
+    subgraph UIState["React Native UI Layer"]
+        ComponentState["Local Component State (useState / useMemo)"]
+        OptimisticUI["Optimistic UI Feedback"]
+    end
+
+    subgraph OfflineStorage["Local Persistence Layer"]
+        AsyncStorageEngine["AsyncStorage: cached_littlebirdies_tasks"]
+    end
+
+    subgraph NetworkLayer["Service & Network Layer"]
+        APIHandler["lib/api.ts Client"]
+        AuthInterceptor["Bearer Token Interceptor"]
+    end
+
+    subgraph RemoteServer["Remote Backend Layer"]
+        ExpressServer["Node.js Express Server"]
+        DatabaseEngine["In-Memory Store / Database"]
+    end
+
+    UserAction --> ComponentState
+    ComponentState --> OptimisticUI
+    ComponentState -->|1. Lưu ngay vào Cache| AsyncStorageEngine
+    ComponentState -->|2. Dispatch Network Request| APIHandler
+
+    APIHandler --> AuthInterceptor
+    AuthInterceptor -->|3. HTTP REST Call| ExpressServer
+    ExpressServer --> DatabaseEngine
+    DatabaseEngine -->|4. Response Data| ExpressServer
+    ExpressServer -->|5. JSON Payload| APIHandler
+    APIHandler -->|6. Reconcile & Refresh| ComponentState
+    ComponentState -->|7. Re-sync Cache| AsyncStorageEngine

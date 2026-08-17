@@ -1,0 +1,35 @@
+sequenceDiagram
+    autonumber
+    actor User as Người dùng
+    participant Screen as TaskListScreen / DetailScreen
+    participant Cache as AsyncStorage Cache
+    participant API as lib/api.ts
+    participant Backend as Express REST Server
+
+    Note over User, Backend: Luồng 1: Load dữ liệu Offline-First
+    User->>Screen: Mở màn hình Tasks
+    Screen->>Cache: getItem("cached_littlebirdies_tasks")
+    Cache-->>Screen: Trả về dữ liệu đệm ngay lập tức (Zero lag)
+    Screen->>User: Render danh sách nhiệm vụ tức thì
+    Screen->>API: api.getItems() (Fetch mới nhất ngầm)
+    API->>Backend: GET /api/items (Bearer Token)
+    Backend-->>API: 200 OK [Mới nhất]
+    API-->>Screen: Cập nhật state UI
+    Screen->>Cache: setItem("cached_littlebirdies_tasks", freshData)
+
+    Note over User, Backend: Luồng 2: Quick Toggle Complete (Optimistic Update)
+    User->>Screen: Tap Checkbox hoàn thành nhiệm vụ
+    Screen->>Screen: Đổi status sang "done" & gạch ngang tiêu đề (Optimistic)
+    Screen->>Cache: Lưu trạng thái mới vào AsyncStorage
+    Screen->>API: api.updateItem(id, { status: "done" })
+    API->>Backend: PUT /api/items/:id { status: "done" }
+    Backend-->>API: 200 OK { id, status: "done", ... }
+
+    Note over User, Backend: Luồng 3: Tạo nhiệm vụ mới
+    User->>Screen: Điền Form và bấm "Lưu"
+    Screen->>API: api.createItem({ title, category, priority, ... })
+    API->>Backend: POST /api/items
+    Backend-->>API: 201 Created { id, ... }
+    API-->>Screen: Trả về record mới tạo
+    Screen->>Cache: Prepend record mới vào cache
+    Screen->>User: Trở về danh sách với task mới ở đầu

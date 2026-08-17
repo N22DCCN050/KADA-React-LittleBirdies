@@ -1,0 +1,56 @@
+graph TB
+    subgraph Client["Mobile Client (Expo SDK 54 / React Native 0.81)"]
+        subgraph Presentation["Presentation & Routing Layer"]
+            Router["Expo Router v6"]
+            Tabs["Tab Navigator: Tasks | Analytics | Settings"]
+            Screens["Screens: TaskDetail | TaskForm | Login"]
+            Components["UI Components: Card | Badge | CategoryFilter | LanguageToggle"]
+        end
+
+        subgraph Core["Core Business Logic & State"]
+            ThemeTokens["Theme & Design Tokens (theme.ts)"]
+            I18nEngine["Bilingual Engine (i18n-js: VI / EN)"]
+            StateHooks["React Hooks (useState, useMemo, useCallback)"]
+        end
+
+        subgraph Storage["Offline Storage Layer"]
+            AsyncStorage["AsyncStorage Engine (cached_littlebirdies_tasks)"]
+            AuthStore["Auth Session Manager (auth.ts)"]
+        end
+
+        subgraph Network["Network & Service Layer"]
+            APIClient["API Service (lib/api.ts)"]
+            Interceptor["Bearer Token Interceptor & Fallback Handler"]
+        end
+    end
+
+    subgraph Backend["Backend Layer (Node.js Express Server)"]
+        ExpressApp["Express API Server (Port 5000)"]
+        AuthRoute["Auth Router (/api/auth/login)"]
+        ItemsRoute["Items Router (/api/items)"]
+        StatsRoute["Stats Router (/api/stats)"]
+        SeedDB["In-Memory Task Store & Initial Seeds"]
+    end
+
+    Router --> Tabs
+    Router --> Screens
+    Screens --> Components
+    Screens --> StateHooks
+    Tabs --> StateHooks
+    Components --> ThemeTokens
+    Screens --> I18nEngine
+
+    StateHooks --> AsyncStorage
+    StateHooks --> APIClient
+    AuthStore --> AsyncStorage
+
+    APIClient --> Interceptor
+    Interceptor -->|HTTP / JSON with Bearer Token| ExpressApp
+
+    ExpressApp --> AuthRoute
+    ExpressApp --> ItemsRoute
+    ExpressApp --> StatsRoute
+
+    ItemsRoute --> SeedDB
+    StatsRoute --> SeedDB
+    AuthRoute --> SeedDB

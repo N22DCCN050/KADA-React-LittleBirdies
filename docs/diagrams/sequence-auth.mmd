@@ -1,0 +1,31 @@
+sequenceDiagram
+    autonumber
+    actor User as Người dùng
+    participant LoginScreen as Màn hình Login
+    participant AuthLib as lib/auth.ts
+    participant API as lib/api.ts
+    participant Storage as AsyncStorage / SecureStore
+    participant Backend as Express Mock Backend
+
+    User->>LoginScreen: Nhập email hoặc chọn Quick Demo (Student/Manager/Dev)
+    User->>LoginScreen: Bấm "Sign In" / "Đăng Nhập"
+    LoginScreen->>API: api.login(email)
+    API->>Backend: POST /api/auth/login { email }
+    Backend-->>API: 200 OK { token, name, email, role }
+    API-->>LoginScreen: Trả về Authentication Result
+    LoginScreen->>AuthLib: saveToken(token)
+    AuthLib->>Storage: setItem("auth_token", token)
+    LoginScreen->>User: Điều hướng vào App (Tabs: Tasks)
+
+    Note over User, Storage: Xác thực các request tiếp theo
+    User->>LoginScreen: Mở màn hình danh sách nhiệm vụ
+    API->>Storage: getToken()
+    Storage-->>API: Bearer demo-token-xyz
+    API->>Backend: GET /api/items (Header: Authorization: Bearer token)
+    Backend-->>API: 200 OK [Danh sách nhiệm vụ]
+
+    Note over User, Storage: Quy trình Đăng xuất
+    User->>LoginScreen: Bấm "Log Out" tại Settings
+    LoginScreen->>AuthLib: clearToken()
+    AuthLib->>Storage: removeItem("auth_token")
+    LoginScreen->>User: Điều hướng về màn hình Login

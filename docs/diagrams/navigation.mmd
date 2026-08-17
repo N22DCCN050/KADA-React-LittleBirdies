@@ -1,0 +1,33 @@
+graph TD
+    Root["Root Layout (_layout.tsx)"]
+    
+    AuthCheck{"Đã có Token chưa?"}
+    LoginScreen["Màn hình Đăng nhập (login.tsx)"]
+    
+    TabsLayout["Tabs Layout ((tabs)/_layout.tsx)"]
+    TabTasks["Tab 1: Công việc ((tabs)/index.tsx)"]
+    TabAnalytics["Tab 2: Thống kê ((tabs)/analytics.tsx)"]
+    TabSettings["Tab 3: Cài đặt & Nhóm ((tabs)/settings.tsx)"]
+
+    TaskDetail["Chi tiết Công việc (item/[id].tsx)"]
+    TaskForm["Tạo / Chỉnh sửa Công việc (item/new.tsx)"]
+
+    Root --> AuthCheck
+    AuthCheck -->|Chưa đăng nhập| LoginScreen
+    AuthCheck -->|Đã đăng nhập| TabsLayout
+
+    LoginScreen -->|Đăng nhập thành công| TabsLayout
+
+    TabsLayout --> TabTasks
+    TabsLayout --> TabAnalytics
+    TabsLayout --> TabSettings
+
+    TabTasks -->|Tap vào Task Card| TaskDetail
+    TabTasks -->|Bấm nút FAB '+'| TaskForm
+    
+    TaskDetail -->|Bấm nút 'Sửa'| TaskForm
+    TaskDetail -->|Bấm nút 'Quay lại'| TabTasks
+
+    TaskForm -->|Bấm 'Lưu' hoặc 'Hủy'| TabTasks
+
+    TabSettings -->|Bấm 'Đăng xuất'| LoginScreen
