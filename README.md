@@ -7,7 +7,7 @@
 
 ## 👥 Danh sách thành viên nhóm (Team Members)
 
-| STT | Họ và Tên | MSSV | Vai trò chính |
+| STT | Họ và Tên | MSSV |
 | :---: | :--- | :---: | :--- |
 | 1 | **Huỳnh Bá Anh Khoa** | `N22DCCN141` |
 | 2 | **Vũ Kim Long** | `N22DCCN050` |
@@ -27,8 +27,20 @@
 - 🌐 **Đa ngôn ngữ toàn diện**: Chuyển đổi linh hoạt song ngữ Tiếng Việt (🇻🇳 VI) và Tiếng Anh (🇬🇧 EN).
 - ✨ **Giao diện hiện đại**: Thiết kế bo góc chuẩn mực, bóng mờ tinh tế, thanh lọc chip ngang, thanh tìm kiếm nhanh, nút Floating Action Button (FAB) tiện lợi.
 
-
 ---
+
+## 📸 Hình ảnh Giao diện Ứng dụng (Screenshots)
+
+| **1. Màn hình Đăng nhập (Login)** | **2. Danh sách Công việc (Tasks)** |
+| :---: | :---: |
+| ![Màn hình Đăng nhập](docs/screenshots/Login.jpg) | ![Danh sách Công việc](docs/screenshots/Tasks.jpg) |
+| *Giao diện đăng nhập thân thiện, hỗ trợ đăng nhập nhanh tài khoản mẫu (Student/Manager/Dev) và chuyển đổi ngôn ngữ song ngữ.* | *Danh sách nhiệm vụ trực quan, hỗ trợ tìm kiếm tức thời, thanh lọc chip danh mục, lọc trạng thái, gắn sao yêu thích và nút FAB tiện lợi.* |
+
+| **3. Thống kê & Năng suất (Analytics)** | **4. Cài đặt & Nhóm (Settings)** |
+| :---: | :---: |
+| ![Thống kê & Năng suất](docs/screenshots/Analytics.jpg) | ![Cài đặt & Nhóm](docs/screenshots/Settings.jpg) |
+| *Bảng thống kê KPI, theo dõi điểm năng suất (Productivity Health) và biểu đồ phân bổ khối lượng công việc theo danh mục & độ ưu tiên.* | *Hồ sơ người dùng, tùy chọn đổi ngôn ngữ EN/VI, công cụ quản lý bộ nhớ đệm AsyncStorage và thông tin thành viên Team_LittleBirdies.* |
+
 
 ## 🚀 Hướng dẫn Cài đặt & Chạy Ứng dụng (Quick Start)
 
