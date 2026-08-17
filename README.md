@@ -9,11 +9,11 @@
 
 | STT | Họ và Tên | MSSV | Vai trò chính |
 | :---: | :--- | :---: | :--- |
-| 1 | **Huỳnh Bá Anh Khoa** | `N22DCCN141` | Team Leader & Fullstack Architecture |
-| 2 | **Vũ Kim Long** | `N22DCCN050` | Frontend Development & React Native UI |
-| 3 | **Trần Tuấn Hải** | `N22DCCN026` | Backend Services & Mock APIs |
-| 4 | **Đặng Nhật Nam** | `N22DCDT038` | UI/UX Design & Technical Documentation |
-| 5 | **Tạ Quang An** | `N22DCAT003` | QA, Testing & Validation |
+| 1 | **Huỳnh Bá Anh Khoa** | `N22DCCN141` |
+| 2 | **Vũ Kim Long** | `N22DCCN050` |
+| 3 | **Trần Tuấn Hải** | `N22DCCN026` |
+| 4 | **Đặng Nhật Nam** | `N22DCDT038` |
+| 5 | **Tạ Quang An** | `N22DCAT003` |
 
 ---
 
@@ -26,6 +26,7 @@
 - 💾 **Kiến trúc Offline-First**: Lưu trữ và đồng bộ dữ liệu đệm mượt mà qua `AsyncStorage`, thao tác tức thời (Optimistic UI) không lo giật lag hay mất mạng.
 - 🌐 **Đa ngôn ngữ toàn diện**: Chuyển đổi linh hoạt song ngữ Tiếng Việt (🇻🇳 VI) và Tiếng Anh (🇬🇧 EN).
 - ✨ **Giao diện hiện đại**: Thiết kế bo góc chuẩn mực, bóng mờ tinh tế, thanh lọc chip ngang, thanh tìm kiếm nhanh, nút Floating Action Button (FAB) tiện lợi.
+
 
 ---
 
