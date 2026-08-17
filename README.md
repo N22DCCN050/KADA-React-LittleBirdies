@@ -8,7 +8,6 @@
 ## 👥 Danh sách thành viên nhóm (Team Members)
 
 | STT | Họ và Tên | MSSV |
-| :---: | :--- | :---: | :--- |
 | 1 | **Huỳnh Bá Anh Khoa** | `N22DCCN141` |
 | 2 | **Vũ Kim Long** | `N22DCCN050` |
 | 3 | **Trần Tuấn Hải** | `N22DCCN026` |
